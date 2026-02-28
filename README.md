@@ -1,10 +1,8 @@
-# Julia Glinka Fotografia & Hyunjin Motion
+# Julia Glinka Fotografia
 
-A PureScript/Halogen project containing two interactive web applications:
+Professional photography portfolio website for maternity photography sessions in Warsaw, Poland.
 
-## Applications
-
-### 1. Julia Glinka Fotografia (`/dev/index.html`)
+## Features
 Professional photography portfolio website for maternity photography sessions in Warsaw, Poland.
 
 **Features:**
@@ -21,18 +19,9 @@ Professional photography portfolio website for maternity photography sessions in
 - Three packages: Basic (650 zł), Standard (970 zł), Premium (1350 zł)
 - Additional services: Makeup (250 zł), Makeup + hair styling (350 zł)
 
-### 2. Hyunjin Brownian Motion (`/dev/brownian.html`)
-Interactive particle visualization featuring Hyunjin images.
-
-**Features:**
-- Brownian motion physics simulation
-- Particle collision and repulsion
-- Border bouncing
-- K-Pop styled UI with animated gradients
-- Click to add particles at cursor position
-- Particle trails with glow effects
-
 ## Quick Start
+
+### Local Development
 
 ```sh
 npm install
@@ -42,12 +31,44 @@ npm run serve
 
 Then open http://localhost:1234/dev/index.html
 
+### GitHub Pages Deployment
+
+Build for GitHub Pages:
+
+```sh
+npm run build:gh
+```
+
+This creates a `githubio/` folder with all files ready for deployment.
+
+To deploy to GitHub Pages:
+
+1. **Build the project:**
+   ```sh
+   npm run build:gh
+   ```
+
+2. **Commit the githubio folder:**
+   ```sh
+   git add githubio/
+   git commit -m "Build for GitHub Pages"
+   git push
+   ```
+
+3. **Configure GitHub Pages:**
+   - Go to your repository Settings → Pages
+   - Set Source to: Deploy from a branch
+   - Set Branch to: `master` (or your main branch)
+   - Set Folder to: `/ (root)` or `/githubio`
+   - Save settings
+
+4. **Wait for deployment** - Your site will be available at `https://your-username.github.io/juliaglinka/`
+
 ## Project Structure
 
 ```
 ├── dev/
 │   ├── index.html          # Portfolio app
-│   ├── brownian.html       # Brownian motion app
 │   ├── index.js            # Entry point
 │   └── images/             # Session photos (30 images)
 │       ├── julia.jpg       # Photographer portrait
@@ -55,9 +76,10 @@ Then open http://localhost:1234/dev/index.html
 ├── src/
 │   ├── Main.purs           # Main entry point
 │   └── App/
-│       ├── Portfolio.purs  # Photography portfolio
-│       └── Brownian.purs   # Brownian motion app
+│       └── Portfolio.purs  # Photography portfolio
+├── githubio/              # Built files for GitHub Pages
 ├── output/                 # Compiled PureScript
+├── build-gh.sh            # GitHub Pages build script
 ├── spago.dhall            # Dependencies
 └── package.json           # npm scripts
 ```
@@ -85,17 +107,14 @@ npm run serve
 
 Key PureScript packages:
 - halogen - UI components
-- aff - Asynchronous effects
 - arrays, foldable-traversable - Data structures
-- random - Random number generation
 - web-dom, web-html, web-uievents - Web APIs
 
 ## Notes
 
-- Images are extracted from the original PDF offer document
+- Images are extracted from original PDF offer document
 - All client testimonials are authentic
 - Contact information and pricing are real (2026)
-- The Brownian motion app uses canvas rendering with FFI
 
 ## License
 

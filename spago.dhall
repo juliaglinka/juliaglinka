@@ -1,24 +1,9 @@
-{ name = "halogen-project"
+{ name = "juliaglinka"
 , dependencies =
-  [ "aff"
-  , "arrays"
-  , "console"
-  , "datetime"
+  [ "halogen"
   , "effect"
-  , "foldable-traversable"
-  , "halogen"
-  , "integers"
-  , "maybe"
-  , "node-buffer"
-  , "node-fs"
-  , "nullable"
   , "prelude"
-  , "random"
-  , "tailrec"
-  , "web-dom"
-  , "web-html"
-  , "web-uievents"
   ]
-, packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, packages = https://github.com/purescript/package-sets/releases/download/psc-0.15.4-20220816/packages.dhall sha256:8b4467b4b5041914f9b765779c8936d6d4c230b1f60eb64f6269c71812fd7e98
+, sources = [ "src/**/*.purs" ]
 }

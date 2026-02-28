@@ -4,16 +4,13 @@
 
 The user wanted to:
 1. Fix issues with a PureScript Halogen project
-2. Create a Brownian motion particle visualization featuring Hyunjin (K-pop idol) images
-3. Create a professional photography portfolio website for "Julia Glinka Fotografia" - a maternity photography business in Warsaw, Poland
-4. Extract real photos from a PDF offer document and integrate them into the portfolio
-5. Style everything elegantly using Tailwind CSS
-6. Commit all changes to git with a summary README
+2. Create a professional photography portfolio website for "Julia Glinka Fotografia" - a maternity photography business in Warsaw, Poland
+3. Extract real photos from a PDF offer document and integrate them into the portfolio
+4. Style everything elegantly using Tailwind CSS
+5. Deploy to GitHub Pages
 
 ## Instructions
 
-- Create Brownian motion visualization with particles appearing under cursor, repelling each other, and bouncing off borders
-- Make particles display Hyunjin images inside them with K-Pop styled UI
 - Create photography portfolio similar to lolamelani.com style
 - Extract photos from `/home/ag/Downloads/Oferta-sesja-ciazowa-2026.pdf`
 - Use real contact info, pricing, and testimonials from the PDF
@@ -33,12 +30,7 @@ The user wanted to:
 ## Accomplished
 
 1. **Fixed initial project issues** - removed unused imports, fixed dependencies
-2. **Created Brownian Motion app** (`src/App/Brownian.purs`, `src/App/Brownian.js`):
-   - Particles with physics (velocity, repulsion, border bouncing)
-   - Canvas rendering with FFI
-   - Image loading via CORS proxy
-   - K-Pop styled HTML page with animated gradients, sparkles, glowing effects
-3. **Created Portfolio app** (`src/App/Portfolio.purs`):
+2. **Created Portfolio app** (`src/App/Portfolio.purs`):
    - Hero section with photographer name and CTA
    - About section with Julia's photo and story
    - Services section (4 service cards)
@@ -47,42 +39,42 @@ The user wanted to:
    - Testimonials (6 real client reviews)
    - Contact section with real info
    - Responsive navigation with mobile menu
-4. **Extracted 30 photos from PDF**:
+3. **Extracted 30 photos from PDF**:
    - `julia.jpg` (photographer portrait from page 1)
    - `session-01.jpg` through `session-29.jpg` (portfolio photos)
-5. **Styled with Tailwind CSS** - elegant stone/neutral color palette
-6. **Fixed styling issues** - replaced all arbitrary Tailwind values with standard classes
+4. **Styled with Tailwind CSS** - elegant stone/neutral color palette
+5. **Fixed styling issues** - replaced all arbitrary Tailwind values with standard classes
+6. **Created GitHub Pages build script** (`build-gh.sh`) for easy deployment
 7. **Committed to git** with comprehensive README.md
 
 ## Relevant files / directories
 
 ```
-/home/ag/wsp/pure-halo1/
+/home/ag/wsp/juliaglinka/
 ├── dev/
 │   ├── index.html          # Portfolio HTML with Tailwind CDN
 │   ├── index.js            # ES module entry: import { main } from "../output/Main/index.js"
-│   ├── brownian.html       # Brownian motion app HTML (K-Pop styled)
 │   └── images/
 │       ├── julia.jpg       # Photographer portrait
 │       └── session-*.jpg   # 29 session photos
+├── githubio/              # Built files for GitHub Pages
 ├── src/
 │   ├── Main.purs           # Entry point, runs Portfolio.component
 │   └── App/
-│       ├── Portfolio.purs  # Photography portfolio Halogen component
-│       ├── Brownian.purs   # Brownian motion Halogen component
-│       └── Brownian.js     # FFI for canvas operations
-├── spago.dhall             # Dependencies: halogen, aff, arrays, random, web-dom, web-html, etc.
-├── package.json            # serve script uses python HTTP server
+│       └── Portfolio.purs  # Photography portfolio Halogen component
+├── spago.dhall             # Dependencies: halogen, arrays, web-dom, web-html, etc.
+├── package.json            # serve and build scripts
 ├── serve.sh                # Development server script
+├── build-gh.sh            # GitHub Pages build script
 └── README.md               # Project documentation
 ```
 
 ## Key PureScript modules
 
-- `src/Main.purs` - Routes to Portfolio app
+- `src/Main.purs` - Entry point, runs Portfolio component
 - `src/App/Portfolio.purs` - Full portfolio with sections: Nav, Hero, About, Services, Gallery, Packages, Testimonials, Contact, Footer
-- `src/App/Brownian.purs` - Particle physics simulation with canvas FFI
 
 ## Current state
 
 Portfolio app loads and displays correctly at http://localhost:1234/dev/index.html
+Ready for GitHub Pages deployment with `npm run build:gh`
