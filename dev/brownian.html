@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyunjin Motion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0015 0%, #1a0a2e 25%, #16213e 50%, #0f0c29 75%, #1a0a2e 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .sparkles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkle 3s ease-in-out infinite;
+        box-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #00ffff;
+      }
+
+      @keyframes sparkle {
+        0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+        50% { opacity: 1; transform: scale(1) rotate(180deg); }
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff, #ffff00);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: textGradient 4s ease infinite;
+        text-shadow: 0 0 40px rgba(255, 0, 255, 0.5);
+        filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+      }
+
+      @keyframes textGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+
+      .controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      button {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3));
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.5s ease;
+      }
+
+      button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 40px rgba(255, 0, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      button:hover::before {
+        left: 100%;
+      }
+
+      .canvas-wrapper {
+        position: relative;
+        border-radius: 20px;
+        padding: 4px;
+        background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+        background-size: 400% 400%;
+        animation: borderGradient 8s ease infinite;
+        box-shadow: 0 0 60px rgba(255, 0, 255, 0.3), 0 0 100px rgba(0, 255, 255, 0.2);
+      }
+
+      @keyframes borderGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .canvas-inner {
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      canvas {
+        display: block;
+        background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 50%, #050510 100%);
+      }
+
+      .stats {
+        margin-top: 25px;
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .stat {
+        text-align: center;
+        padding: 20px 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .stat-value {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ff00ff, #00ffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-top: 5px;
+      }
+
+      .hint {
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.4;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: #ff00ff;
+        top: -100px;
+        left: -100px;
+        animation: float1 20s ease-in-out infinite;
+      }
+
+      .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: #00ffff;
+        bottom: -150px;
+        right: -150px;
+        animation: float2 25s ease-in-out infinite;
+      }
+
+      @keyframes float1 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(100px, 100px); }
+      }
+
+      @keyframes float2 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-100px, -100px); }
+      }
+
+      .back-link {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        z-index: 10;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/" class="back-link">← Portfolio</a>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="container">
+      <script src="./index.js" type="module"></script>
+    </div>
+
+    <script>
+      const sparklesContainer = document.getElementById('sparkles');
+      for (let i = 0; i < 50; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() * 3 + 's';
+        sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+        sparklesContainer.appendChild(sparkle);
+      }
+    </script>
+  </body>
+</html>
