@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Git pre-commit hook to prevent incorrect HTML import paths
+
+echo "Running pre-commit checks..."
+
+# Check if test script exists
+if [ ! -f "test-html-paths.sh" ]; then
+  echo "Warning: test-html-paths.sh not found, skipping tests"
+  exit 0
+fi
+
+# Make executable if needed
+chmod +x test-html-paths.sh
+
+# Run tests
+./test-html-paths.sh
+
+# If tests pass, allow commit
+exit $?
