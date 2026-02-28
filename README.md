@@ -116,6 +116,39 @@ Key PureScript packages:
 - All client testimonials are authentic
 - Contact information and pricing are real (2026)
 
+## Preventing MIME Type Errors
+
+If you see `Loading module from ".../output/Main/index.js" was blocked because of a disallowed MIME type ("text/html")`:
+
+**This is caused by incorrect import paths in HTML files:**
+
+- `dev/index.html` must use: `from "../output/Main/index.js"` (output is in parent directory)
+- `docs/index.html` must use: `from "./output/Main/index.js"` (output is in same directory)
+
+**To prevent this:**
+
+1. Never manually change import paths in HTML files
+2. Always run `npm run build:gh` to build for GitHub Pages
+3. Run `./test-html-paths.sh` to verify paths are correct
+4. A pre-commit hook automatically checks paths before commits
+
+**If the error occurs:**
+
+1. Reset dev/index.html to correct path:
+   ```sh
+   git checkout dev/index.html
+   ```
+
+2. Rebuild:
+   ```sh
+   npm run build:gh
+   ```
+
+3. Test locally:
+   ```sh
+   ./test-html-paths.sh
+   ```
+
 ## License
 
 Original template: MIT License
