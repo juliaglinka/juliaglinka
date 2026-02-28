@@ -9,15 +9,18 @@ import Halogen.HTML.Events as HE
 
 type State =
   { menuOpen :: Boolean
+  , lightboxImage :: String
   }
 
 data Action
   = ToggleMenu
+  | OpenLightbox String
+  | CloseLightbox
 
 component :: forall q i o m. MonadEffect m => H.Component q i o m
 component =
   H.mkComponent
-    { initialState: \_ -> { menuOpen: false }
+    { initialState: \_ -> { menuOpen: false, lightboxImage: "" }
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
@@ -38,21 +41,16 @@ render state =
         , renderContact
         ]
     , renderFooter
+    , if state.lightboxImage /= "" then renderLightbox state.lightboxImage else HH.text ""
     ]
 
 renderNav :: forall cs m. State -> H.ComponentHTML Action cs m
-renderNav state =
+renderNav _ =
   HH.nav [ HP.class_ (H.ClassName "fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md"), HP.attr (HH.AttrName "role") "navigation", HP.attr (HH.AttrName "aria-label") "Nawigacja główna" ]
-    [ HH.div [ HP.class_ (H.ClassName "max-w-7xl mx-auto px-8 h-24 flex items-center justify-between") ]
-        [ HH.a [ HP.href "#", HP.class_ (H.ClassName "font-display text-2xl md:text-3xl text-stone-800 hover:text-accent transition-colors"), HP.title "Strona główna" ]
+    [ HH.div [ HP.class_ (H.ClassName "max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between") ]
+        [ HH.a [ HP.href "#", HP.class_ (H.ClassName "font-handwriting text-lg md:text-2xl text-stone-800 hover:text-accent transition-colors"), HP.title "Strona główna" ]
             [ HH.text "Julia Glinka" ]
-        , HH.button 
-            [ HP.class_ (H.ClassName "md:hidden text-stone-600 p-2")
-            , HE.onClick \_ -> ToggleMenu
-            , HP.attr (HH.AttrName "aria-label") if state.menuOpen then "Zamknij menu" else "Otwórz menu"
-            ]
-            [ HH.text if state.menuOpen then "✕" else "☰" ]
-        , HH.ul [ HP.class_ (H.ClassName if state.menuOpen then "absolute top-24 left-0 right-0 bg-cream md:hidden flex flex-col items-center py-8 gap-8" else "hidden md:flex gap-12") ]
+        , HH.ul [ HP.class_ (H.ClassName "flex gap-4 md:gap-12 text-xs md:text-sm") ]
             [ navLink "O mnie" "#about"
             , navLink "Galeria" "#gallery"
             , navLink "Oferta" "#packages"
@@ -65,7 +63,7 @@ renderNav state =
       HH.li_ 
         [ HH.a 
             [ HP.href href
-            , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-stone-500 hover:text-stone-800 transition-colors")
+            , HP.class_ (H.ClassName "font-body text-xs md:text-sm tracking-widest uppercase text-stone-500 hover:text-stone-800 transition-colors")
             ]
             [ HH.text text ]
         ]
@@ -80,7 +78,7 @@ renderHero =
         [ HH.div [ HP.class_ (H.ClassName "max-w-4xl animate-fade-in") ]
             [ HH.p [ HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 mb-6") ]
                 [ HH.text "Sesje Ciążowe • Warszawa" ]
-            , HH.h1 [ HP.class_ (H.ClassName "font-display text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow-lg font-normal") ]
+            , HH.h1 [ HP.class_ (H.ClassName "font-handwriting text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow-lg font-normal") ]
                 [ HH.text "Julia Glinka" ]
             , HH.p [ HP.class_ (H.ClassName "font-body text-lg md:text-xl text-white/90 max-w-xl leading-relaxed mb-10") ]
                 [ HH.text "Tworzę artystyczne, eleganckie portrety ciążowe, które zachowają piękno tego wyjątkowego czasu na zawsze." ]
@@ -207,6 +205,7 @@ galleryImage src =
         [ HP.src src
         , HP.alt "Sesja ciążowa"
         , HP.class_ (H.ClassName "w-full h-full object-cover transition-all duration-700 group-hover:scale-105")
+        , HE.onClick \_ -> OpenLightbox src
         ]
     ]
 
@@ -217,6 +216,7 @@ galleryImageLarge src =
         [ HP.src src
         , HP.alt "Sesja ciążowa"
         , HP.class_ (H.ClassName "w-full h-full object-cover transition-all duration-700 group-hover:scale-105")
+        , HE.onClick \_ -> OpenLightbox src
         ]
     ]
 
@@ -368,7 +368,7 @@ renderFooter =
     [ HH.div [ HP.class_ (H.ClassName "max-w-7xl mx-auto px-8") ]
         [ HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-between items-center gap-8" ) ]
             [ HH.div [ HP.class_ (H.ClassName "text-center md:text-left") ]
-                [ HH.h3 [ HP.class_ (H.ClassName "font-display text-xl text-white mb-2") ]
+                [ HH.h3 [ HP.class_ (H.ClassName "font-handwriting text-xl text-white mb-2") ]
                     [ HH.text "Julia Glinka" ]
                 , HH.p [ HP.class_ (H.ClassName "font-body text-sm text-stone-500") ]
                     [ HH.text "Fotografia Ciążowa • Warszawa" ]
@@ -379,7 +379,30 @@ renderFooter =
         ]
     ]
 
+renderLightbox :: forall cs m. String -> H.ComponentHTML Action cs m
+renderLightbox src =
+  HH.div 
+    [ HP.class_ (H.ClassName "fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm")
+    , HE.onClick \_ -> CloseLightbox
+    ]
+    [ HH.button 
+        [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors")
+        , HP.attr (HH.AttrName "aria-label") "Zamknij"
+        , HE.onClick \_ -> CloseLightbox
+        ]
+        [ HH.text "✕" ]
+    , HH.img 
+        [ HP.src src
+        , HP.alt "Zdjęcie w pełnym rozmiarze"
+        , HP.class_ (H.ClassName "max-w-[90vw] max-h-[90vh] object-contain cursor-pointer")
+        ]
+    ]
+
 handleAction :: forall cs o m. MonadEffect m => Action -> H.HalogenM State Action cs o m Unit
 handleAction = case _ of
   ToggleMenu -> do
     H.modify_ \st -> st { menuOpen = not st.menuOpen }
+  OpenLightbox src -> do
+    H.modify_ \st -> st { lightboxImage = src }
+  CloseLightbox -> do
+    H.modify_ \st -> st { lightboxImage = "" }
