@@ -132,6 +132,12 @@ If you see `Loading module from ".../output/Main/index.js" was blocked because o
 3. Run `./test-html-paths.sh` to verify paths are correct
 4. A pre-commit hook automatically checks paths before commits
 
+**Setting up git hooks (for contributors):**
+
+```sh
+git config core.hooksPath .githooks
+```
+
 **If the error occurs:**
 
 1. Reset dev/index.html to correct path:
