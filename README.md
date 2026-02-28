@@ -39,18 +39,18 @@ Build for GitHub Pages:
 npm run build:gh
 ```
 
-This creates a `githubio/` folder with all files ready for deployment.
+This creates a `docs/` folder with all files ready for deployment.
 
 To deploy to GitHub Pages:
 
-1. **Build the project:**
+1. **Build** project:
    ```sh
    npm run build:gh
    ```
 
-2. **Commit the githubio folder:**
+2. **Commit** docs folder:
    ```sh
-   git add githubio/
+   git add docs/
    git commit -m "Build for GitHub Pages"
    git push
    ```
@@ -59,7 +59,7 @@ To deploy to GitHub Pages:
    - Go to your repository Settings → Pages
    - Set Source to: Deploy from a branch
    - Set Branch to: `master` (or your main branch)
-   - Set Folder to: `/ (root)` or `/githubio`
+   - Set Folder to: `/docs`
    - Save settings
 
 4. **Wait for deployment** - Your site will be available at `https://your-username.github.io/juliaglinka/`
@@ -73,11 +73,11 @@ To deploy to GitHub Pages:
 │   └── images/             # Session photos (30 images)
 │       ├── julia.jpg       # Photographer portrait
 │       └── session-*.jpg   # Portfolio photos
+├── docs/                  # Built files for GitHub Pages
 ├── src/
 │   ├── Main.purs           # Main entry point
 │   └── App/
 │       └── Portfolio.purs  # Photography portfolio
-├── githubio/              # Built files for GitHub Pages
 ├── output/                 # Compiled PureScript
 ├── build-gh.sh            # GitHub Pages build script
 ├── spago.dhall            # Dependencies

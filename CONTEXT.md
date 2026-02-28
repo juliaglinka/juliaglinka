@@ -11,7 +11,7 @@ The user wanted to:
 
 ## Instructions
 
-- Create photography portfolio similar to lolamelani.com style
+- Create professional photography portfolio website with elegant, minimalist design
 - Extract photos from `/home/ag/Downloads/Oferta-sesja-ciazowa-2026.pdf`
 - Use real contact info, pricing, and testimonials from the PDF
 - Use Tailwind CSS CDN for styling (elegant, minimalist, no colorful icons)
@@ -57,7 +57,7 @@ The user wanted to:
 │   └── images/
 │       ├── julia.jpg       # Photographer portrait
 │       └── session-*.jpg   # 29 session photos
-├── githubio/              # Built files for GitHub Pages
+├── docs/                  # Built files for GitHub Pages
 ├── src/
 │   ├── Main.purs           # Entry point, runs Portfolio.component
 │   └── App/
