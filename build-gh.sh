@@ -29,8 +29,8 @@ cp -r dev/images/* docs/images/
 # Fix paths in HTML files for docs folder
 echo "Fixing paths in HTML files..."
 
-# For index.html - change ../output/ to ./output/
-sed -i 's|../output/|./output/|g' docs/index.html
+# For index.html - only change ../output/ to ./output/ in import statements, not in HTML attributes
+sed -i 's|"../output/|"./output/|g' docs/index.html
 
 # Minify HTML (optional - requires html-minifier-terser)
 # Uncomment following lines if you want HTML minification:
