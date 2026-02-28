@@ -1,6 +1,8 @@
 module App.Portfolio where
 
 import Prelude
+import Data.Array (findIndex, length, (!!))
+import Data.Maybe (maybe)
 import Effect.Class (class MonadEffect)
 import Halogen as H
 import Halogen.HTML as HH
@@ -10,17 +12,33 @@ import Halogen.HTML.Events as HE
 type State =
   { menuOpen :: Boolean
   , lightboxImage :: String
+  , currentImageIndex :: Int
   }
 
 data Action
   = ToggleMenu
   | OpenLightbox String
   | CloseLightbox
+  | NextImage
+  | PreviousImage
+
+galleryImages :: Array String
+galleryImages =
+  [ "./images/session-01.jpg"
+  , "./images/session-02.jpg"
+  , "./images/session-03.jpg"
+  , "./images/session-04.jpg"
+  , "./images/session-05.jpg"
+  , "./images/session-06.jpg"
+  , "./images/session-07.jpg"
+  , "./images/session-08.jpg"
+  , "./images/session-09.jpg"
+  ]
 
 component :: forall q i o m. MonadEffect m => H.Component q i o m
 component =
   H.mkComponent
-    { initialState: \_ -> { menuOpen: false, lightboxImage: "" }
+    { initialState: \_ -> { menuOpen: false, lightboxImage: "", currentImageIndex: 0 }
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
@@ -382,19 +400,32 @@ renderFooter =
 renderLightbox :: forall cs m. String -> H.ComponentHTML Action cs m
 renderLightbox src =
   HH.div 
-    [ HP.class_ (H.ClassName "fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm")
+    [ HP.class_ (H.ClassName "fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm touch-pan-x")
     , HE.onClick \_ -> CloseLightbox
     ]
     [ HH.button 
-        [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors")
+        [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors z-50")
         , HP.attr (HH.AttrName "aria-label") "Zamknij"
         , HE.onClick \_ -> CloseLightbox
         ]
         [ HH.text "✕" ]
+    , HH.button 
+        [ HP.class_ (H.ClassName "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
+        , HP.attr (HH.AttrName "aria-label") "Poprzednie zdjęcie"
+        , HE.onClick \_ -> PreviousImage
+        ]
+        [ HH.text "‹" ]
+    , HH.button 
+        [ HP.class_ (H.ClassName "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
+        , HP.attr (HH.AttrName "aria-label") "Następne zdjęcie"
+        , HE.onClick \_ -> NextImage
+        ]
+        [ HH.text "›" ]
     , HH.img 
         [ HP.src src
         , HP.alt "Zdjęcie w pełnym rozmiarze"
-        , HP.class_ (H.ClassName "max-w-[90vw] max-h-[90vh] object-contain cursor-pointer")
+        , HP.class_ (H.ClassName "max-w-[90vw] max-h-[90vh] object-contain cursor-pointer select-none")
+        , HP.attr (HH.AttrName "draggable") "false"
         ]
     ]
 
@@ -403,6 +434,19 @@ handleAction = case _ of
   ToggleMenu -> do
     H.modify_ \st -> st { menuOpen = not st.menuOpen }
   OpenLightbox src -> do
-    H.modify_ \st -> st { lightboxImage = src }
+    let index = maybe 0 identity (findIndex (_ == src) galleryImages)
+    H.modify_ \st -> st { lightboxImage = src, currentImageIndex = index }
   CloseLightbox -> do
     H.modify_ \st -> st { lightboxImage = "" }
+  NextImage -> do
+    H.modify_ \st -> 
+      let len = length galleryImages
+          nextIndex = if st.currentImageIndex >= len - 1 then 0 else st.currentImageIndex + 1
+          nextImage = galleryImages !! nextIndex
+      in st { lightboxImage = maybe st.lightboxImage identity nextImage, currentImageIndex = nextIndex }
+  PreviousImage -> do
+    H.modify_ \st ->
+      let len = length galleryImages
+          prevIndex = if st.currentImageIndex <= 0 then len - 1 else st.currentImageIndex - 1
+          prevImage = galleryImages !! prevIndex
+      in st { lightboxImage = maybe st.lightboxImage identity prevImage, currentImageIndex = prevIndex }
