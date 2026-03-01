@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Julia Glinka Fotografia | Sesje Ciążowe Warszawa - Profesjonalne Zdjęcia w Ciąży</title>
+    
+    <meta name="description" content="Profesjonalna fotografia ciążowa w Warszawie. Julia Glinka tworzy eleganckie, artystyczne sesje zdjęciowe dla przyszłych mam. Garderoba studyjna, makijaż i profesjonalna edycja.">
+    <meta name="keywords" content="sesja ciążowa warszawa, fotografia ciążowa, zdjęcia w ciąży, fotograf ciążowy warszawa, sesje zdjęciowe ciążowe, maternity photography poland">
+    <meta name="author" content="Julia Glinka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://juliaglinka.pl/">
+    
+    <meta name="geo.region" content="PL-MZ">
+    <meta name="geo.placename" content="Warszawa">
+    <meta name="geo.position" content="52.2297;21.0122">
+    <meta name="ICBM" content="52.2297, 21.0122">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juliaglinka.pl/">
+    <meta property="og:title" content="Julia Glinka Fotografia | Sesje Ciążowe Warszawa">
+    <meta property="og:description" content="Profesjonalna fotografia ciążowa w Warszawie. Eleganckie, artystyczne sesje zdjęciowe dla przyszłych mam z garderobą studyjną i profesjonalną edycją.">
+    <meta property="og:image" content="https://juliaglinka.pl/images/og-image.jpg">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:site_name" content="Julia Glinka Fotografia">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://juliaglinka.pl/">
+    <meta name="twitter:title" content="Julia Glinka Fotografia | Sesje Ciążowe Warszawa">
+    <meta name="twitter:description" content="Profesjonalna fotografia ciążowa w Warszawie. Eleganckie sesje zdjęciowe dla przyszłych mam.">
+    <meta name="twitter:image" content="https://juliaglinka.pl/images/og-image.jpg">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Julia Glinka Fotografia",
+      "image": "https://juliaglinka.pl/images/julia.jpg",
+      "description": "Profesjonalna fotografia ciążowa w Warszawie. Tworzę eleganckie, artystyczne sesje zdjęciowe dla przyszłych mam.",
+      "@id": "https://juliaglinka.pl",
+      "url": "https://juliaglinka.pl",
+      "telephone": "+48513775857",
+      "email": "juliya.glinka@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Warszawa",
+        "addressCountry": "PL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.2297,
+        "longitude": 21.0122
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "priceRange": "$$",
+      "sameAs": [
+        "https://www.instagram.com/julia_glinka_fotografia"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Sesja Ciążowa",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Julia Glinka Fotografia"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Warszawa"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Pakiety Sesji Ciążowej",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pakiet Basic"
+            },
+            "price": "650",
+            "priceCurrency": "PLN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pakiet Standard"
+            },
+            "price": "970",
+            "priceCurrency": "PLN"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pakiet Premium"
+            },
+            "price": "1350",
+            "priceCurrency": "PLN"
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body class="font-sans font-light text-stone-700 antialiased">
+    <script type="module" src="./bundle.js"></script>
+    <script>
+      // Swipe functionality for lightbox
+      const galleryImages = [
+        "./images/session-01.jpg",
+        "./images/session-02.jpg",
+        "./images/session-03.jpg",
+        "./images/session-04.jpg",
+        "./images/session-05.jpg",
+        "./images/session-06.jpg",
+        "./images/session-07.jpg",
+        "./images/session-08.jpg",
+        "./images/session-09.jpg"
+      ];
+      
+      let touchStartX = 0;
+      let touchEndX = 0;
+      let currentImageIndex = 0;
+      
+      function findImageIndex(src) {
+        return galleryImages.indexOf(src);
+      }
+      
+      function updateImage(src) {
+        const index = findImageIndex(src);
+        if (index !== -1) {
+          currentImageIndex = index;
+        }
+      }
+      
+      function nextImage() {
+        const lightbox = document.querySelector('.fixed.inset-0.z-50');
+        if (!lightbox) return;
+        
+        const img = lightbox.querySelector('img');
+        if (!img) return;
+        
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+        img.src = galleryImages[currentImageIndex];
+      }
+      
+      function prevImage() {
+        const lightbox = document.querySelector('.fixed.inset-0.z-50');
+        if (!lightbox) return;
+        
+        const img = lightbox.querySelector('img');
+        if (!img) return;
+        
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        img.src = galleryImages[currentImageIndex];
+      }
+      
+      // Add swipe listeners after a delay to let Halogen render
+      setTimeout(() => {
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1 && node.classList && node.classList.contains('fixed') && node.classList.contains('inset-0') && node.classList.contains('z-50')) {
+                // Lightbox added
+                const img = node.querySelector('img');
+                if (img) {
+                  updateImage(img.src);
+                }
+                
+                node.addEventListener('touchstart', (e) => {
+                  touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+                
+                node.addEventListener('touchend', (e) => {
+                  touchEndX = e.changedTouches[0].screenX;
+                  handleSwipe();
+                }, { passive: true });
+              }
+            });
+          });
+        });
+        
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        // Also watch for img src changes in existing lightbox
+        setInterval(() => {
+          const lightbox = document.querySelector('.fixed.inset-0.z-50');
+          if (lightbox) {
+            const img = lightbox.querySelector('img');
+            if (img && img.src) {
+              const cleanSrc = img.src.replace(window.location.origin + '/', './');
+              if (galleryImages.includes(cleanSrc)) {
+                updateImage(cleanSrc);
+              }
+            }
+          }
+        }, 100);
+      }, 1000);
+      
+      function handleSwipe() {
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            nextImage();
+          } else {
+            prevImage();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
