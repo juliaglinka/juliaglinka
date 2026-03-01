@@ -1,3 +1,8 @@
+---
+name: review-and-publish
+description: Review code quality, run CI checks, and publish the project to GitHub Pages
+---
+
 # Review and Publish Skill
 
 Review code quality, run checks, and publish the project.
