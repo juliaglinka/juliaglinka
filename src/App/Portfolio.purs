@@ -407,18 +407,21 @@ renderLightbox src =
         [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors z-50")
         , HP.attr (HH.AttrName "aria-label") "Zamknij"
         , HE.onClick \_ -> CloseLightbox
+        , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "✕" ]
     , HH.button 
         [ HP.class_ (H.ClassName "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
         , HP.attr (HH.AttrName "aria-label") "Poprzednie zdjęcie"
         , HE.onClick \_ -> PreviousImage
+        , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "‹" ]
     , HH.button 
         [ HP.class_ (H.ClassName "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
         , HP.attr (HH.AttrName "aria-label") "Następne zdjęcie"
         , HE.onClick \_ -> NextImage
+        , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "›" ]
     , HH.img 
@@ -426,6 +429,7 @@ renderLightbox src =
         , HP.alt "Zdjęcie w pełnym rozmiarze"
         , HP.class_ (H.ClassName "max-w-[90vw] max-h-[90vh] object-contain cursor-pointer select-none")
         , HP.attr (HH.AttrName "draggable") "false"
+        , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
     ]
 
