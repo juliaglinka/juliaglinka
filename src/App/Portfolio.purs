@@ -2,18 +2,24 @@ module App.Portfolio where
 
 import Prelude
 import Data.Array (findIndex, length, (!!))
+import Data.Int (toNumber)
 import Data.Maybe (maybe)
 import Effect.Class (class MonadEffect)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Web.TouchEvent (TouchEvent)
+import Web.TouchEvent.TouchEvent (touches)
+import Web.TouchEvent.TouchList as TL
+import Web.TouchEvent.Touch as T
 import Util.Decode (decodeBase64)
 
 type State =
   { menuOpen :: Boolean
   , lightboxImage :: String
   , currentImageIndex :: Int
+  , touchStartX :: Number
   }
 
 data Action
@@ -22,6 +28,8 @@ data Action
   | CloseLightbox
   | NextImage
   | PreviousImage
+  | TouchStart Number
+  | TouchEnd Number
 
 galleryImages :: Array String
 galleryImages =
@@ -51,7 +59,7 @@ obfuscatedTelText = "NTEzIDc3NSA4NTc="
 component :: forall q i o m. MonadEffect m => H.Component q i o m
 component =
   H.mkComponent
-    { initialState: \_ -> { menuOpen: false, lightboxImage: "", currentImageIndex: 0 }
+    { initialState: \_ -> { menuOpen: false, lightboxImage: "", currentImageIndex: 0, touchStartX: 0.0 }
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
@@ -419,6 +427,8 @@ renderLightbox src =
   HH.div
     [ HP.class_ (H.ClassName "fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm touch-pan-x")
     , HE.onClick \_ -> CloseLightbox
+    , HE.onTouchStart \e -> TouchStart (getTouchX e)
+    , HE.onTouchEnd \e -> TouchEnd (getTouchX e)
     ]
     [ HH.button
         [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors z-50")
@@ -458,6 +468,31 @@ prevImageIndex :: Int -> Int -> Int
 prevImageIndex currentIdx len =
   if currentIdx <= 0 then len - 1 else currentIdx - 1
 
+swipeThreshold :: Number
+swipeThreshold = 50.0
+
+data SwipeDirection = SwipeLeft | SwipeRight | NoSwipe
+
+derive instance eqSwipeDirection :: Eq SwipeDirection
+derive instance ordSwipeDirection :: Ord SwipeDirection
+
+instance showSwipeDirection :: Show SwipeDirection where
+  show SwipeLeft = "SwipeLeft"
+  show SwipeRight = "SwipeRight"
+  show NoSwipe = "NoSwipe"
+
+determineSwipe :: Number -> Number -> SwipeDirection
+determineSwipe touchStartX touchEndX =
+  let
+    diff = touchStartX - touchEndX
+  in
+    if diff > swipeThreshold then SwipeLeft
+    else if diff < -swipeThreshold then SwipeRight
+    else NoSwipe
+
+getTouchX :: TouchEvent -> Number
+getTouchX e = maybe 0.0 (\t -> toNumber $ T.clientX t) (TL.item 0 (touches e))
+
 handleAction :: forall cs o m. MonadEffect m => Action -> H.HalogenM State Action cs o m Unit
 handleAction = case _ of
   ToggleMenu -> do
@@ -483,3 +518,21 @@ handleAction = case _ of
         prevImage = galleryImages !! idx
       in
         st { lightboxImage = maybe st.lightboxImage identity prevImage, currentImageIndex = idx }
+  TouchStart x -> do
+    H.modify_ \st -> st { touchStartX = x }
+  TouchEnd x -> do
+    st <- H.get
+    case determineSwipe st.touchStartX x of
+      SwipeLeft -> do
+        let
+          len = length galleryImages
+          idx = nextImageIndex st.currentImageIndex len
+          nextImage = galleryImages !! idx
+        H.modify_ \s -> s { lightboxImage = maybe s.lightboxImage identity nextImage, currentImageIndex = idx }
+      SwipeRight -> do
+        let
+          len = length galleryImages
+          idx = prevImageIndex st.currentImageIndex len
+          prevImage = galleryImages !! idx
+        H.modify_ \s -> s { lightboxImage = maybe s.lightboxImage identity prevImage, currentImageIndex = idx }
+      NoSwipe -> pure unit

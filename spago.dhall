@@ -4,9 +4,11 @@
   , "arrays"
   , "effect"
   , "halogen"
+  , "integers"
   , "maybe"
   , "prelude"
   , "spec"
+  , "web-touchevents"
   ]
 , packages =
     https://github.com/purescript/package-sets/releases/download/psc-0.15.4-20220816/packages.dhall

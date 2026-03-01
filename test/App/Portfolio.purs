@@ -1,7 +1,7 @@
 module Test.App.Portfolio where
 
 import Prelude
-import App.Portfolio (galleryImages, nextImageIndex, prevImageIndex)
+import App.Portfolio (galleryImages, nextImageIndex, prevImageIndex, determineSwipe, SwipeDirection(..), swipeThreshold)
 import Data.Array (length)
 import Test.Spec (describe, it, Spec)
 import Test.Spec.Assertions (shouldEqual)
@@ -24,3 +24,22 @@ spec = describe "App.Portfolio" do
     it "nextImageIndex and prevImageIndex are inverses" do
       nextImageIndex (prevImageIndex 3 9) 9 `shouldEqual` 3
       prevImageIndex (nextImageIndex 5 9) 9 `shouldEqual` 5
+
+  describe "swipe" do
+    it "detects swipe left when diff > threshold" do
+      determineSwipe 100.0 0.0 `shouldEqual` SwipeLeft
+
+    it "detects swipe right when diff < -threshold" do
+      determineSwipe 0.0 100.0 `shouldEqual` SwipeRight
+
+    it "returns NoSwipe when diff equals threshold" do
+      determineSwipe 100.0 50.0 `shouldEqual` NoSwipe
+
+    it "returns NoSwipe when diff equals negative threshold" do
+      determineSwipe 50.0 100.0 `shouldEqual` NoSwipe
+
+    it "returns NoSwipe for small movements" do
+      determineSwipe 100.0 90.0 `shouldEqual` NoSwipe
+
+    it "swipeThreshold is 50" do
+      swipeThreshold `shouldEqual` 50.0

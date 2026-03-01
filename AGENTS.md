@@ -61,3 +61,21 @@ When user says 'publish':
    ```
 
 GitHub Actions will automatically build and deploy to GitHub Pages.
+
+## Code Architecture
+
+### index.html
+
+`dev/index.html` should ONLY contain:
+- HTML boilerplate and `<head>` with SEO meta tags
+- Script tag to load `bundle.js`
+- JSON-LD structured data for SEO
+
+**All application logic must be in PureScript.** Never add JavaScript to index.html.
+
+### Testing Requirements
+
+- All pure functions must be unit tested
+- Extract business logic into pure functions for testability
+- Tests go in `test/` mirroring `src/` structure
+- Use `purescript-spec` framework
