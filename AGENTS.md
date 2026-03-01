@@ -46,9 +46,13 @@ npm run build:gh    # Build for GitHub Pages
 
 **NEVER push to `githubio` branch unless the user explicitly says 'publish'.**
 
+**IMPORTANT: `docs/CNAME` must NEVER be deleted.** This file contains the custom domain for GitHub Pages. Always preserve it during builds.
+
 When user says 'publish':
-1. Ensure all changes are committed to `main`
-2. Fast-forward `githubio` to `main`:
+1. Check for uncommitted changes. If there are any, inform the user and ask them to type 'ignore' to proceed anyway.
+2. Ensure all changes are committed to `main`
+3. Verify `docs/CNAME` exists and contains `juliaglinka.pl`
+4. Fast-forward `githubio` to `main`:
    ```bash
    git checkout githubio
    git merge --ff-only main
