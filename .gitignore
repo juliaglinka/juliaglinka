@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+.spago/
+
+# Build output
+output/
+dev/bundle.js
+dev/styles.css
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

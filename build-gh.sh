@@ -14,30 +14,29 @@ mkdir -p docs/images
 echo "Building PureScript project..."
 spago build
 
+# Build Tailwind CSS
+echo "Building Tailwind CSS..."
+npx tailwindcss -i ./dev/input.css -o ./dev/styles.css --minify
+
+# Bundle JavaScript
+echo "Bundling JavaScript..."
+npx esbuild dev/entry.js --bundle --format=esm --outfile=dev/bundle.js --minify
+
 # Copy HTML files
 echo "Copying HTML files..."
 cp dev/index.html docs/index.html
 
-# Copy PureScript output
-echo "Copying PureScript output..."
-cp -r output docs/
+# Copy compiled CSS
+echo "Copying CSS..."
+cp dev/styles.css docs/styles.css
+
+# Copy bundled JS
+echo "Copying bundled JS..."
+cp dev/bundle.js docs/bundle.js
 
 # Copy images
 echo "Copying images..."
 cp -r dev/images/* docs/images/
-
-# Fix paths in HTML files for docs folder
-echo "Fixing paths in HTML files..."
-
-# For index.html - only change ../output/ to ./output/ in import statements, not in HTML attributes
-sed -i 's|"../output/|"./output/|g' docs/index.html
-
-# Minify HTML (optional - requires html-minifier-terser)
-# Uncomment following lines if you want HTML minification:
-# if command -v html-minifier-terser &> /dev/null; then
-#   echo "Minifying HTML files..."
-#   html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --minify-css true --minify-js true docs/index.html -o docs/index.html
-# fi
 
 # Create .nojekyll file for GitHub Pages (to ignore _ folders)
 touch docs/.nojekyll
