@@ -8,6 +8,7 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Util.Decode (decodeBase64)
 
 type State =
   { menuOpen :: Boolean
@@ -34,6 +35,18 @@ galleryImages =
   , "./images/session-08.jpg"
   , "./images/session-09.jpg"
   ]
+
+obfuscatedEmail :: String
+obfuscatedEmail = "bWFpbHRvOmp1bGl5YS5nbGlua2FAZ21haWwuY29t"
+
+obfuscatedTel :: String
+obfuscatedTel = "dGVsOis0ODUxMzc3NTg1Nw=="
+
+obfuscatedEmailText :: String
+obfuscatedEmailText = "anVsaXlhLmdsaW5rYUBnbWFpbC5jb20="
+
+obfuscatedTelText :: String
+obfuscatedTelText = "NTEzIDc3NSA4NTc="
 
 component :: forall q i o m. MonadEffect m => H.Component q i o m
 component =
@@ -362,10 +375,10 @@ renderContact =
         , HH.p [ HP.class_ (H.ClassName "font-body text-lg text-white/80 max-w-xl mx-auto mb-12") ]
             [ HH.text "Chętnie odpowiem na wszystkie pytania i pomogę zaplanować wymarzoną sesję tego wyjątkowego czasu." ]
         , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12") ]
-            [ HH.a [ HP.href "#", HP.attr (HH.AttrName "data-contact") "tel", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
-                [ HH.text "..." ]
-            , HH.a [ HP.href "#", HP.attr (HH.AttrName "data-contact") "email", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
-                [ HH.text "..." ]
+            [ HH.a [ HP.href (decodeBase64 obfuscatedTel), HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+                [ HH.text (decodeBase64 obfuscatedTelText) ]
+            , HH.a [ HP.href (decodeBase64 obfuscatedEmail), HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+                [ HH.text (decodeBase64 obfuscatedEmailText) ]
             ]
         , HH.div [ HP.class_ (H.ClassName "flex justify-center gap-8") ]
             [ HH.a
@@ -376,8 +389,7 @@ renderContact =
                 ]
                 [ HH.text "Instagram" ]
             , HH.a
-                [ HP.href "#"
-                , HP.attr (HH.AttrName "data-contact") "email"
+                [ HP.href (decodeBase64 obfuscatedEmail)
                 , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
                 ]
                 [ HH.text "Email" ]
