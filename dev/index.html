@@ -40,8 +40,6 @@
       "description": "Profesjonalna fotografia ciążowa w Warszawie. Tworzę eleganckie, artystyczne sesje zdjęciowe dla przyszłych mam.",
       "@id": "https://juliaglinka.pl",
       "url": "https://juliaglinka.pl",
-      "telephone": "+48513775857",
-      "email": "juliya.glinka@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Warszawa",
@@ -122,6 +120,44 @@
   <body class="font-sans font-light text-stone-700 antialiased">
     <script type="module" src="./bundle.js"></script>
     <script>
+      // Decode obfuscated contact info (base64)
+      (function() {
+        function decode(str) {
+          return atob(str);
+        }
+        var emailHref = 'bWFpbHRvOmp1bGl5YS5nbGlua2FAZ21haWwuY29t';
+        var telHref = 'dGVsOis0ODUxMzc3NTg1Nw==';
+        var emailText = 'anVsaXlhLmdsaW5rYUBnbWFpbC5jb20=';
+        var telText = 'NTEzIDc3NSA4NTc=';
+        
+        function setContactInfo() {
+          var emailEls = document.querySelectorAll('[data-contact="email"]');
+          var telEls = document.querySelectorAll('[data-contact="tel"]');
+          
+          emailEls.forEach(function(el) {
+            el.href = decode(emailHref);
+            if (el.textContent.trim() === '...') {
+              el.textContent = decode(emailText);
+            }
+          });
+          
+          telEls.forEach(function(el) {
+            el.href = decode(telHref);
+            if (el.textContent.trim() === '...') {
+              el.textContent = decode(telText);
+            }
+          });
+        }
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setContactInfo);
+        } else {
+          setContactInfo();
+        }
+        
+        setInterval(setContactInfo, 1000);
+      })();
+      
       // Swipe functionality for lightbox
       const galleryImages = [
         "./images/session-01.jpg",

@@ -362,10 +362,10 @@ renderContact =
         , HH.p [ HP.class_ (H.ClassName "font-body text-lg text-white/80 max-w-xl mx-auto mb-12") ]
             [ HH.text "Chętnie odpowiem na wszystkie pytania i pomogę zaplanować wymarzoną sesję tego wyjątkowego czasu." ]
         , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12") ]
-            [ HH.a [ HP.href "tel:+48513775857", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
-                [ HH.text "513 775 857" ]
-            , HH.a [ HP.href "mailto:juliya.glinka@gmail.com", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
-                [ HH.text "juliya.glinka@gmail.com" ]
+            [ HH.a [ HP.href "#", HP.attr (HH.AttrName "data-contact") "tel", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+                [ HH.text "..." ]
+            , HH.a [ HP.href "#", HP.attr (HH.AttrName "data-contact") "email", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+                [ HH.text "..." ]
             ]
         , HH.div [ HP.class_ (H.ClassName "flex justify-center gap-8") ]
             [ HH.a
@@ -376,7 +376,8 @@ renderContact =
                 ]
                 [ HH.text "Instagram" ]
             , HH.a
-                [ HP.href "mailto:juliya.glinka@gmail.com"
+                [ HP.href "#"
+                , HP.attr (HH.AttrName "data-contact") "email"
                 , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
                 ]
                 [ HH.text "Email" ]
