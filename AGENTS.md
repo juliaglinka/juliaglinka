@@ -41,3 +41,19 @@ npm run build:gh    # Build for GitHub Pages
 - Pre-commit hooks run: lint, build, test
 - All checks must pass before commit
 - Main branches: `main`, `githubio`
+
+### Publishing
+
+**NEVER push to `githubio` branch unless the user explicitly says 'publish'.**
+
+When user says 'publish':
+1. Ensure all changes are committed to `main`
+2. Fast-forward `githubio` to `main`:
+   ```bash
+   git checkout githubio
+   git merge --ff-only main
+   git push origin githubio
+   git checkout main
+   ```
+
+GitHub Actions will automatically build and deploy to GitHub Pages.
