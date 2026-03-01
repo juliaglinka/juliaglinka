@@ -1,20 +1,27 @@
 #!/bin/bash
 
-# Git pre-commit hook to prevent incorrect HTML import paths
-
 echo "Running pre-commit checks..."
 
-# Check if test script exists
-if [ ! -f "test-html-paths.sh" ]; then
-  echo "Warning: test-html-paths.sh not found, skipping tests"
-  exit 0
+echo "Checking PureScript formatting..."
+npx purs-tidy check src test
+if [ $? -ne 0 ]; then
+  echo "Formatting check failed. Run 'npm run format' to fix."
+  exit 1
 fi
 
-# Make executable if needed
-chmod +x test-html-paths.sh
+echo "Building PureScript project..."
+spago build
+if [ $? -ne 0 ]; then
+  echo "Build failed."
+  exit 1
+fi
 
-# Run tests
-./test-html-paths.sh
+echo "Running tests..."
+spago test
+if [ $? -ne 0 ]; then
+  echo "Tests failed."
+  exit 1
+fi
 
-# If tests pass, allow commit
-exit $?
+echo "All pre-commit checks passed!"
+exit 0

@@ -47,7 +47,7 @@ render :: forall cs m. State -> H.ComponentHTML Action cs m
 render state =
   HH.div [ HP.class_ (H.ClassName "bg-cream") ]
     [ renderNav state
-    , HH.main_ 
+    , HH.main_
         [ renderHero
         , renderIntro
         , renderAbout
@@ -77,14 +77,14 @@ renderNav _ =
         ]
     ]
   where
-    navLink text href =
-      HH.li_ 
-        [ HH.a 
-            [ HP.href href
-            , HP.class_ (H.ClassName "font-body text-xs md:text-sm tracking-widest uppercase text-stone-500 hover:text-stone-800 transition-colors")
-            ]
-            [ HH.text text ]
-        ]
+  navLink text href =
+    HH.li_
+      [ HH.a
+          [ HP.href href
+          , HP.class_ (H.ClassName "font-body text-xs md:text-sm tracking-widest uppercase text-stone-500 hover:text-stone-800 transition-colors")
+          ]
+          [ HH.text text ]
+      ]
 
 renderHero :: forall cs m. H.ComponentHTML Action cs m
 renderHero =
@@ -100,7 +100,7 @@ renderHero =
                 [ HH.text "Julia Glinka" ]
             , HH.p [ HP.class_ (H.ClassName "font-body text-lg md:text-xl text-white/90 max-w-xl leading-relaxed mb-10") ]
                 [ HH.text "Tworzę artystyczne, eleganckie portrety ciążowe, które zachowają piękno tego wyjątkowego czasu na zawsze." ]
-            , HH.a 
+            , HH.a
                 [ HP.href "#packages"
                 , HP.class_ (H.ClassName "inline-block font-body text-sm tracking-widest uppercase text-white border-b-2 border-white pb-2 hover:border-accent hover:text-accent transition-colors")
                 ]
@@ -114,7 +114,8 @@ renderIntro =
   HH.section [ HP.class_ (H.ClassName "py-32 md:py-48 bg-cream") ]
     [ HH.div [ HP.class_ (H.ClassName "max-w-4xl mx-auto px-8 text-center") ]
         [ HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-6xl text-stone-800 mb-12 font-normal leading-tight") ]
-            [ HH.text "Uchwycę Twoje", HH.br []
+            [ HH.text "Uchwycę Twoje"
+            , HH.br []
             , HH.em [ HP.class_ (H.ClassName "font-normal") ] [ HH.text "najpiękniejsze chwile" ]
             ]
         , HH.p [ HP.class_ (H.ClassName "font-body text-lg text-stone-500 leading-relaxed max-w-2xl mx-auto") ]
@@ -129,7 +130,7 @@ renderAbout =
         [ HH.div [ HP.class_ (H.ClassName "grid md:grid-cols-12 gap-8 md:gap-12 items-center") ]
             [ HH.div [ HP.class_ (H.ClassName "md:col-span-5 relative") ]
                 [ HH.div [ HP.class_ (H.ClassName "absolute -top-8 -left-8 w-full h-full border border-accent/30") ] []
-                , HH.img 
+                , HH.img
                     [ HP.src "./images/julia.jpg"
                     , HP.alt "Julia Glinka - fotografka"
                     , HP.class_ (H.ClassName "relative z-10 w-full shadow-4xl")
@@ -140,7 +141,7 @@ renderAbout =
                     [ HH.text "O mnie" ]
                 , HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-5xl text-stone-800 mb-8 font-normal") ]
                     [ HH.text "Pasja do fotografii ciążowej" ]
-                , HH.div [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed space-y-6" ) ]
+                , HH.div [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed space-y-6") ]
                     [ HH.p_ [ HH.text "Mam na imię Julia i od siedmiu lat specjalizuję się w profesjonalnych sesjach ciążowych. Moja przygoda z fotografią zaczęła się, gdy zaczęłam robić zdjęcia mojej córeczce." ]
                     , HH.p_ [ HH.text "Kocham wyjątkowy kształt kobiecego ciała w ciąży i z radością podkreślam jego piękno w elegancki, subtelny sposób. Każda sesja to dla mnie wyjątkowe doświadczenie." ]
                     ]
@@ -164,28 +165,28 @@ renderServices =
                 [ HH.div [ HP.class_ (H.ClassName "w-16 h-px bg-accent mb-8 group-hover:w-24 transition-all duration-500") ] []
                 , HH.h3 [ HP.class_ (H.ClassName "font-display text-2xl text-stone-800 mb-4") ]
                     [ HH.text "Sesja Fotograficzna" ]
-                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed" ) ]
+                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed") ]
                     [ HH.text "Podczas sesji wykorzystamy różne pozy i stylizacje. Będę Cię prowadzić krok po kroku, pokazując, jak pozować, abyś czuła się swobodnie i pięknie." ]
                 ]
             , HH.div [ HP.class_ (H.ClassName "group") ]
                 [ HH.div [ HP.class_ (H.ClassName "w-16 h-px bg-accent mb-8 group-hover:w-24 transition-all duration-500") ] []
                 , HH.h3 [ HP.class_ (H.ClassName "font-display text-2xl text-stone-800 mb-4") ]
                     [ HH.text "Garderoba Studyjna" ]
-                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed" ) ]
+                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed") ]
                     [ HH.text "Do Twojej dyspozycji jest garderoba studyjna pełna eleganckich sukienek, tkanin i dodatków, które podkreślą Twoje piękno." ]
                 ]
             , HH.div [ HP.class_ (H.ClassName "group") ]
                 [ HH.div [ HP.class_ (H.ClassName "w-16 h-px bg-accent mb-8 group-hover:w-24 transition-all duration-500") ] []
                 , HH.h3 [ HP.class_ (H.ClassName "font-display text-2xl text-stone-800 mb-4") ]
                     [ HH.text "Galeria Online" ]
-                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed" ) ]
+                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed") ]
                     [ HH.text "Po sesji otrzymasz dostęp do prywatnej galerii online, gdzie samodzielnie wybierzesz swoje ulubione kadry." ]
                 ]
             , HH.div [ HP.class_ (H.ClassName "group") ]
                 [ HH.div [ HP.class_ (H.ClassName "w-16 h-px bg-accent mb-8 group-hover:w-24 transition-all duration-500") ] []
                 , HH.h3 [ HP.class_ (H.ClassName "font-display text-2xl text-stone-800 mb-4") ]
                     [ HH.text "Profesjonalna Edycja" ]
-                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed" ) ]
+                , HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed") ]
                     [ HH.text "Otrzymasz profesjonalnie wyedytowane fotografie w wysokiej rozdzielczości, gotowe do druku i publikacji." ]
                 ]
             ]
@@ -219,7 +220,7 @@ renderGallery =
 galleryImage :: forall cs m. String -> H.ComponentHTML Action cs m
 galleryImage src =
   HH.figure [ HP.class_ (H.ClassName "aspect-square overflow-hidden group cursor-pointer") ]
-    [ HH.img 
+    [ HH.img
         [ HP.src src
         , HP.alt "Sesja ciążowa"
         , HP.class_ (H.ClassName "w-full h-full object-cover transition-all duration-700 group-hover:scale-105")
@@ -230,7 +231,7 @@ galleryImage src =
 galleryImageLarge :: forall cs m. String -> H.ComponentHTML Action cs m
 galleryImageLarge src =
   HH.figure [ HP.class_ (H.ClassName "aspect-square overflow-hidden group cursor-pointer md:col-span-2 md:row-span-2 md:aspect-auto md:h-full") ]
-    [ HH.img 
+    [ HH.img
         [ HP.src src
         , HP.alt "Sesja ciążowa"
         , HP.class_ (H.ClassName "w-full h-full object-cover transition-all duration-700 group-hover:scale-105")
@@ -245,7 +246,7 @@ renderFeaturedQuote =
         [ HH.img [ HP.src "./images/session-12.jpg", HP.alt "", HP.class_ (H.ClassName "w-full h-full object-cover") ] ]
     , HH.div [ HP.class_ (H.ClassName "absolute inset-0 bg-stone-800/70") ] []
     , HH.div [ HP.class_ (H.ClassName "relative z-10 max-w-4xl mx-auto px-8 text-center") ]
-        [ HH.blockquote_ 
+        [ HH.blockquote_
             [ HH.p [ HP.class_ (H.ClassName "font-display text-3xl md:text-5xl text-white mb-8 font-normal leading-tight text-shadow") ]
                 [ HH.text "\"Sesja ciążowa przerosła moje oczekiwania! Julia potrafiła uchwycić emocje i stworzyć piękne, pełne ciepła kadry.\"" ]
             , HH.footer [ HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70") ]
@@ -267,7 +268,7 @@ renderPackages =
                 [ HH.text "Wybierz pakiet dopasowany do Twoich potrzeb" ]
             ]
         , HH.div [ HP.class_ (H.ClassName "grid md:grid-cols-3 gap-8 mb-16") ]
-            [ packageCard false "Basic" "650" "zł" 
+            [ packageCard false "Basic" "650" "zł"
                 [ "Sesja ok. 1 godziny"
                 , "Garderoba studyjna"
                 , "5 wyedytowanych zdjęć"
@@ -303,15 +304,18 @@ packageCard featured name price currency features =
     [ if featured then HH.div [ HP.class_ (H.ClassName "absolute top-0 right-0 bg-accent text-white text-xs tracking-widest uppercase px-4 py-2") ] [ HH.text "Polecany" ] else HH.text ""
     , HH.h3 [ HP.class_ (H.ClassName "font-display text-2xl mb-6") ]
         [ HH.text name ]
-    , HH.div [ HP.class_ (H.ClassName "mb-8 pb-8 border-b border-stone-200 last:border-0" ) ]
+    , HH.div [ HP.class_ (H.ClassName "mb-8 pb-8 border-b border-stone-200 last:border-0") ]
         [ HH.span [ HP.class_ (H.ClassName "font-display text-5xl") ] [ HH.text price ]
         , HH.span [ HP.class_ (H.ClassName "font-body text-sm ml-1") ] [ HH.text currency ]
         ]
-    , HH.ul [ HP.class_ (H.ClassName "space-y-3 font-body text-sm" ) ] $
-        map (\f -> HH.li [ HP.class_ (H.ClassName "flex items-start gap-3") ]
-            [ HH.span [ HP.class_ (H.ClassName if featured then "text-accent" else "text-accent") ] [ HH.text "—" ]
-            , HH.text f
-            ]) features
+    , HH.ul [ HP.class_ (H.ClassName "space-y-3 font-body text-sm") ] $
+        map
+          ( \f -> HH.li [ HP.class_ (H.ClassName "flex items-start gap-3") ]
+              [ HH.span [ HP.class_ (H.ClassName if featured then "text-accent" else "text-accent") ] [ HH.text "—" ]
+              , HH.text f
+              ]
+          )
+          features
     ]
 
 renderTestimonials :: forall cs m. H.ComponentHTML Action cs m
@@ -325,13 +329,13 @@ renderTestimonials =
                 [ HH.text "Co mówią klientki" ]
             ]
         , HH.div [ HP.class_ (H.ClassName "grid md:grid-cols-2 gap-12 md:gap-16") ]
-            [ testimonial "Magdalena K." 
+            [ testimonial "Magdalena K."
                 "Julia potrafi uchwycić emocje i stworzyć zdjęcia, które mają w sobie coś wyjątkowego. Atmosfera podczas sesji była swobodna i przyjemna."
-            , testimonial "Izabela D." 
+            , testimonial "Izabela D."
                 "Sesja przebiegła w bardzo miłej atmosferze. Pani Julia to osoba niezwykle profesjonalna, pełna pasji. Z pełnym przekonaniem polecam każdej przyszłej mamie!"
-            , testimonial "Anna F." 
+            , testimonial "Anna F."
                 "Sesja ciążowa przerosła moje oczekiwania! Julia potrafiła uchwycić emocje i stworzyć piękne kadry, które będą cudowną pamiątką na całe życie."
-            , testimonial "Sandra G." 
+            , testimonial "Sandra G."
                 "Byłam u Julii na dwóch sesjach ciążowych, obie wyszły obłędnie. Julia jest przesympatyczna, atmosfera na sesji jest świetna - zero stresu."
             ]
         ]
@@ -342,7 +346,7 @@ testimonial name text =
   HH.article [ HP.class_ (H.ClassName "relative pl-8 border-l-2 border-accent/30") ]
     [ HH.blockquote [ HP.class_ (H.ClassName "font-body text-stone-500 leading-relaxed italic mb-6") ]
         [ HH.p_ [ HH.text text ] ]
-    , HH.footer [ HP.class_ (H.ClassName "font-body text-sm text-accent tracking-wider" ) ]
+    , HH.footer [ HP.class_ (H.ClassName "font-body text-sm text-accent tracking-wider") ]
         [ HH.text $ "— " <> name ]
     ]
 
@@ -357,21 +361,21 @@ renderContact =
             [ HH.text "Zarezerwuj sesję" ]
         , HH.p [ HP.class_ (H.ClassName "font-body text-lg text-white/80 max-w-xl mx-auto mb-12") ]
             [ HH.text "Chętnie odpowiem na wszystkie pytania i pomogę zaplanować wymarzoną sesję tego wyjątkowego czasu." ]
-        , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12" ) ]
+        , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12") ]
             [ HH.a [ HP.href "tel:+48513775857", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
                 [ HH.text "513 775 857" ]
             , HH.a [ HP.href "mailto:juliya.glinka@gmail.com", HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
                 [ HH.text "juliya.glinka@gmail.com" ]
             ]
         , HH.div [ HP.class_ (H.ClassName "flex justify-center gap-8") ]
-            [ HH.a 
+            [ HH.a
                 [ HP.href "https://www.instagram.com/julia_glinka_fotografia"
                 , HP.target "_blank"
                 , HP.rel "noopener noreferrer"
                 , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
                 ]
                 [ HH.text "Instagram" ]
-            , HH.a 
+            , HH.a
                 [ HP.href "mailto:juliya.glinka@gmail.com"
                 , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
                 ]
@@ -384,7 +388,7 @@ renderFooter :: forall cs m. H.ComponentHTML Action cs m
 renderFooter =
   HH.footer [ HP.class_ (H.ClassName "bg-stone-900 py-16 text-stone-400"), HP.attr (HH.AttrName "role") "contentinfo" ]
     [ HH.div [ HP.class_ (H.ClassName "max-w-7xl mx-auto px-8") ]
-        [ HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-between items-center gap-8" ) ]
+        [ HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-between items-center gap-8") ]
             [ HH.div [ HP.class_ (H.ClassName "text-center md:text-left") ]
                 [ HH.h3 [ HP.class_ (H.ClassName "font-handwriting text-xl text-white mb-2") ]
                     [ HH.text "Julia Glinka" ]
@@ -399,32 +403,32 @@ renderFooter =
 
 renderLightbox :: forall cs m. String -> H.ComponentHTML Action cs m
 renderLightbox src =
-  HH.div 
+  HH.div
     [ HP.class_ (H.ClassName "fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm touch-pan-x")
     , HE.onClick \_ -> CloseLightbox
     ]
-    [ HH.button 
+    [ HH.button
         [ HP.class_ (H.ClassName "absolute top-4 right-4 text-white text-4xl hover:text-accent transition-colors z-50")
         , HP.attr (HH.AttrName "aria-label") "Zamknij"
         , HE.onClick \_ -> CloseLightbox
         , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "✕" ]
-    , HH.button 
+    , HH.button
         [ HP.class_ (H.ClassName "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
         , HP.attr (HH.AttrName "aria-label") "Poprzednie zdjęcie"
         , HE.onClick \_ -> PreviousImage
         , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "‹" ]
-    , HH.button 
+    , HH.button
         [ HP.class_ (H.ClassName "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white text-3xl md:text-5xl hover:text-accent transition-colors p-2 md:p-4 z-50")
         , HP.attr (HH.AttrName "aria-label") "Następne zdjęcie"
         , HE.onClick \_ -> NextImage
         , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
         [ HH.text "›" ]
-    , HH.img 
+    , HH.img
         [ HP.src src
         , HP.alt "Zdjęcie w pełnym rozmiarze"
         , HP.class_ (H.ClassName "max-w-[90vw] max-h-[90vh] object-contain cursor-pointer select-none")
@@ -432,6 +436,14 @@ renderLightbox src =
         , HP.attr (HH.AttrName "onclick") "event.stopPropagation()"
         ]
     ]
+
+nextImageIndex :: Int -> Int -> Int
+nextImageIndex currentIdx len =
+  if currentIdx >= len - 1 then 0 else currentIdx + 1
+
+prevImageIndex :: Int -> Int -> Int
+prevImageIndex currentIdx len =
+  if currentIdx <= 0 then len - 1 else currentIdx - 1
 
 handleAction :: forall cs o m. MonadEffect m => Action -> H.HalogenM State Action cs o m Unit
 handleAction = case _ of
@@ -443,14 +455,18 @@ handleAction = case _ of
   CloseLightbox -> do
     H.modify_ \st -> st { lightboxImage = "" }
   NextImage -> do
-    H.modify_ \st -> 
-      let len = length galleryImages
-          nextIndex = if st.currentImageIndex >= len - 1 then 0 else st.currentImageIndex + 1
-          nextImage = galleryImages !! nextIndex
-      in st { lightboxImage = maybe st.lightboxImage identity nextImage, currentImageIndex = nextIndex }
+    H.modify_ \st ->
+      let
+        len = length galleryImages
+        idx = nextImageIndex st.currentImageIndex len
+        nextImage = galleryImages !! idx
+      in
+        st { lightboxImage = maybe st.lightboxImage identity nextImage, currentImageIndex = idx }
   PreviousImage -> do
     H.modify_ \st ->
-      let len = length galleryImages
-          prevIndex = if st.currentImageIndex <= 0 then len - 1 else st.currentImageIndex - 1
-          prevImage = galleryImages !! prevIndex
-      in st { lightboxImage = maybe st.lightboxImage identity prevImage, currentImageIndex = prevIndex }
+      let
+        len = length galleryImages
+        idx = prevImageIndex st.currentImageIndex len
+        prevImage = galleryImages !! idx
+      in
+        st { lightboxImage = maybe st.lightboxImage identity prevImage, currentImageIndex = idx }
