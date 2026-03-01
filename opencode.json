@@ -1,5 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": {
+    "purescript": {
+      "command": ["npx", "purescript-language-server", "--stdio"],
+      "extensions": [".purs"]
+    }
+  },
   "formatter": {
     "purs-tidy": {
       "command": ["npx", "purs-tidy", "format", "$FILE"],
