@@ -41,6 +41,9 @@ cp -r dev/images/* docs/images/
 # Create .nojekyll file for GitHub Pages (to ignore _ folders)
 touch docs/.nojekyll
 
+# Preserve CNAME for custom domain (must never be deleted)
+echo "juliaglinka.pl" > docs/CNAME
+
 echo "Build complete! Files are in docs/ directory"
 echo ""
 echo "To deploy to GitHub Pages:"
