@@ -293,26 +293,39 @@ renderPackages =
                 [ "Sesja ok. 1 godziny"
                 , "Garderoba studyjna"
                 , "5 wyedytowanych zdjęć"
-                , "Dodatkowe: 70 zł"
+                , "Dodatkowe: 80 zł"
                 ]
             , packageCard true "Standard" "970" "zł"
                 [ "Sesja ok. 1,5 godziny"
                 , "Garderoba studyjna"
                 , "10 wyedytowanych zdjęć"
-                , "5 zdjęć czarno-białych"
-                , "Dodatkowe: 80 zł"
+                , "Dodatkowe: 70 zł"
                 ]
             , packageCard false "Premium" "1350" "zł"
                 [ "Sesja ok. 2 godzin"
                 , "Garderoba studyjna"
                 , "15 wyedytowanych zdjęć"
+                , "5 zdjęć czarno-białych"
                 , "Zdjęcia 15×21 w pudełku"
                 , "Wysyłka paczkomatem"
+                , "Dodatkowe: 60 zł"
                 ]
             ]
-        , HH.div [ HP.class_ (H.ClassName "max-w-2xl mx-auto text-center") ]
-            [ HH.p [ HP.class_ (H.ClassName "font-body text-stone-500 mb-4") ]
-                [ HH.text "Makijaż — 250 zł  •  Makijaż + stylizacja włosów — 350 zł" ]
+        , HH.div [ HP.class_ (H.ClassName "max-w-2xl mx-auto text-center space-y-6") ]
+            [ HH.div [ HP.class_ (H.ClassName "border-t border-stone-200 pt-8") ]
+                [ HH.p [ HP.class_ (H.ClassName "font-display text-xl text-stone-700 mb-4") ]
+                    [ HH.text "Usługi dodatkowe" ]
+                , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center gap-6 md:gap-12 font-body text-stone-600") ]
+                    [ HH.div_
+                        [ HH.p [ HP.class_ (H.ClassName "font-medium text-stone-800") ] [ HH.text "Makijaż profesjonalny" ]
+                        , HH.p [ HP.class_ (H.ClassName "text-sm text-stone-500") ] [ HH.text "250 zł" ]
+                        ]
+                    , HH.div_
+                        [ HH.p [ HP.class_ (H.ClassName "font-medium text-stone-800") ] [ HH.text "Makijaż + stylizacja włosów" ]
+                        , HH.p [ HP.class_ (H.ClassName "text-sm text-stone-500") ] [ HH.text "350 zł" ]
+                        ]
+                    ]
+                ]
             , HH.p [ HP.class_ (H.ClassName "font-body text-sm text-stone-400 italic") ]
                 [ HH.text "Rezerwacja: bezzwrotny zadatek 100 zł" ]
             ]

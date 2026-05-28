@@ -27,6 +27,10 @@ npm run serve       # Build and start dev server
 npm run build:gh    # Build for GitHub Pages
 ```
 
+## Development Workflow
+
+**IMPORTANT: After making any changes to PureScript files, ALWAYS run `npm run build` to rebuild the project.** This ensures `dev/index.html` is updated with the latest changes. Do NOT run `npm run serve` unless explicitly asked.
+
 ## Top-Level Directories
 
 - `src/` - PureScript source code
